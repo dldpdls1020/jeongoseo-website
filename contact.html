@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>문의 — 정오의 서</title>
+<meta name="description" content="출판 상담, 글쓰기 클래스 신청, 제휴 문의 등 정오의 서에 궁금한 점을 남겨주세요.">
+<link rel="icon" href="assets/img/logo-badge-mango.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo-badge-mango.png" alt="정오의 서 로고">
+      <span class="brand-name">정오의 서<small>WHERE STORIES BEGIN</small></span>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="about.html">브랜드 소개</a></li>
+        <li><a href="category.html">카테고리</a></li>
+        <li><a href="class.html">글쓰기 클래스</a></li>
+        <li><a href="contact.html">문의</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="contact.html" class="btn btn-accent">문의하기</a>
+      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">CONTACT</span>
+    <h1>당신의 이야기를<br>기다리고 있습니다</h1>
+    <p>출판 상담, 글쓰기 클래스 신청, 제휴 문의 등 무엇이든 편하게 남겨주세요.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container contact-wrap">
+    <div class="contact-info">
+      <h3>정오의 서 안내</h3>
+      <p style="font-size:14.5px;">문의 남겨주시면 담당 에디터가 확인 후 순서대로 회신드립니다.</p>
+      <ul>
+        <li><span>EMAIL</span>hello@jeongoseo.com</li>
+        <li><span>OPERATING HOURS</span>평일 10:00 – 18:00 (주말·공휴일 휴무)</li>
+        <li><span>SNS</span>인스타그램 @jeongoseo (준비 중)</li>
+      </ul>
+    </div>
+
+    <form class="contact-form">
+      <div class="form-grid">
+        <div class="field">
+          <label for="name">이름</label>
+          <input id="name" name="name" type="text" placeholder="성함을 입력해주세요" required>
+        </div>
+        <div class="field">
+          <label for="email">이메일</label>
+          <input id="email" name="email" type="email" placeholder="답변받으실 이메일" required>
+        </div>
+        <div class="field full">
+          <label for="type">문의 유형</label>
+          <select id="type" name="type" required>
+            <option value="">선택해주세요</option>
+            <option value="publish">출판 상담</option>
+            <option value="class">글쓰기 클래스 신청</option>
+            <option value="partnership">제휴 문의</option>
+            <option value="etc">기타</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="message">문의 내용</label>
+          <textarea id="message" name="message" placeholder="어떤 이야기를 책으로 만들고 싶으신가요?" required></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-accent" style="margin-top:8px;">문의 보내기</button>
+      <p class="form-status form-note"></p>
+      <p class="form-note">※ 현재 데모 페이지로, 실제 메일 발송을 위해서는 폼 연동(예: 이메일 서비스·백엔드)이 필요합니다.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/logo-badge-dark.png" alt="정오의 서 로고">
+        <p>한 줄의 마음에서 시작해 한 권의 책으로 완성되는 곳, 정오의 서입니다.</p>
+      </div>
+      <div class="footer-col">
+        <h4>MENU</h4>
+        <ul>
+          <li><a href="about.html">브랜드 소개</a></li>
+          <li><a href="category.html">카테고리</a></li>
+          <li><a href="class.html">글쓰기 클래스</a></li>
+          <li><a href="contact.html">문의</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="mailto:hello@jeongoseo.com">hello@jeongoseo.com</a></li>
+          <li>평일 10:00 – 18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 정오의 서(JEONGO-UI SEO). All rights reserved.</span>
+      <span>Where Stories Begin</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
