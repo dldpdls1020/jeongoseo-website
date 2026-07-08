@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공지사항 — 정오의 서</title>
+<meta name="description" content="정오의 서의 글쓰기 클래스 일정, 출판 소식 등 공지사항을 전해드립니다.">
+<link rel="icon" href="logo-badge-mango.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="logo-badge-mango.png" alt="정오의 서 로고">
+      <span class="brand-name">정오의 서<small>WHERE STORIES BEGIN</small></span>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="about.html">브랜드 소개</a></li>
+        <li><a href="category.html">카테고리</a></li>
+        <li><a href="class.html">글쓰기 클래스</a></li>
+        <li><a href="notice.html" class="active">공지사항</a></li>
+        <li><a href="contact.html">문의</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="contact.html" class="btn btn-accent">문의하기</a>
+      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">NOTICE</span>
+    <h1 id="notice-hero-title">공지사항</h1>
+    <p id="notice-hero-desc">글쓰기 클래스 일정, 출판 소식 등 정오의 서의 소식을 전해드립니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+
+    <div id="notice-list" class="notice-list">
+      <p class="notice-status">공지사항을 불러오는 중입니다…</p>
+    </div>
+
+    <article id="notice-detail" class="notice-detail" hidden>
+      <a href="notice.html" class="notice-back">← 목록으로</a>
+      <span class="eyebrow" id="notice-date"></span>
+      <h2 id="notice-title"></h2>
+      <div id="notice-body" class="notice-body"></div>
+
+      <div id="notice-comments" class="notice-comments"></div>
+    </article>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="logo-badge-dark.png" alt="정오의 서 로고">
+        <p>한 줄의 마음에서 시작해 한 권의 책으로 완성되는 곳, 정오의 서입니다.</p>
+      </div>
+      <div class="footer-col">
+        <h4>MENU</h4>
+        <ul>
+          <li><a href="about.html">브랜드 소개</a></li>
+          <li><a href="category.html">카테고리</a></li>
+          <li><a href="class.html">글쓰기 클래스</a></li>
+          <li><a href="notice.html">공지사항</a></li>
+          <li><a href="contact.html">문의</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="mailto:hello@jeongoseo.com">hello@jeongoseo.com</a></li>
+          <li>평일 10:00 – 18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 정오의 서(JEONGO-UI SEO). All rights reserved.</span>
+      <span>Where Stories Begin</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="main.js"></script>
+<script>
+(function () {
+  var REPO = "dldpdls1020/jeongoseo-website";
+  var BRANCH = "main";
+  var FOLDER = "content/notices";
+
+  // 댓글(Giscus) 연결 정보 — giscus.app에서 발급받은 값으로 교체하세요.
+  var GISCUS = {
+    repo: REPO,
+    repoId: "PLACEHOLDER_REPO_ID",
+    category: "Announcements",
+    categoryId: "PLACEHOLDER_CATEGORY_ID"
+  };
+
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get("id");
+
+  var listEl = document.getElementById("notice-list");
+  var detailEl = document.getElementById("notice-detail");
+
+  function rawUrl(filename) {
+    return "https://raw.githubusercontent.com/" + REPO + "/" + BRANCH + "/" + FOLDER + "/" + filename;
+  }
+
+  function formatDate(str) {
+    if (!str) return "";
+    return str.split(" ")[0];
+  }
+
+  if (id) {
+    listEl.hidden = true;
+    detailEl.hidden = false;
+    document.getElementById("notice-hero-title").textContent = "공지사항";
+    document.getElementById("notice-hero-desc").textContent = "정오의 서 소식을 전해드립니다.";
+
+    fetch(rawUrl(id))
+      .then(function (r) {
+        if (!r.ok) throw new Error("not found");
+        return r.json();
+      })
+      .then(function (post) {
+        document.title = post.title + " — 정오의 서";
+        document.getElementById("notice-date").textContent = formatDate(post.date);
+        document.getElementById("notice-title").textContent = post.title;
+        document.getElementById("notice-body").innerHTML = window.marked ? marked.parse(post.body || "") : (post.body || "");
+
+        var commentsEl = document.getElementById("notice-comments");
+        if (post.comments === false) {
+          commentsEl.innerHTML = '<p class="notice-comments-off">이 글은 댓글창이 닫혀 있습니다.</p>';
+        } else if (GISCUS.repoId === "PLACEHOLDER_REPO_ID") {
+          commentsEl.innerHTML = '<p class="notice-comments-off">댓글 기능은 아직 연결 중입니다.</p>';
+        } else {
+          var script = document.createElement("script");
+          script.src = "https://giscus.app/client.js";
+          script.setAttribute("data-repo", GISCUS.repo);
+          script.setAttribute("data-repo-id", GISCUS.repoId);
+          script.setAttribute("data-category", GISCUS.category);
+          script.setAttribute("data-category-id", GISCUS.categoryId);
+          script.setAttribute("data-mapping", "pathname");
+          script.setAttribute("data-reactions-enabled", "1");
+          script.setAttribute("data-input-position", "bottom");
+          script.setAttribute("data-theme", "light");
+          script.setAttribute("data-lang", "ko");
+          script.crossOrigin = "anonymous";
+          script.async = true;
+          commentsEl.appendChild(script);
+        }
+      })
+      .catch(function () {
+        detailEl.innerHTML = '<a href="notice.html" class="notice-back">← 목록으로</a><p class="notice-status">글을 찾을 수 없습니다.</p>';
+      });
+  } else {
+    fetch("https://api.github.com/repos/" + REPO + "/contents/" + FOLDER + "?ref=" + BRANCH)
+      .then(function (r) {
+        if (!r.ok) throw new Error("list failed");
+        return r.json();
+      })
+      .then(function (items) {
+        var files = items.filter(function (it) { return it.name.endsWith(".json"); });
+        if (files.length === 0) {
+          listEl.innerHTML = '<p class="notice-status">아직 등록된 공지사항이 없습니다.</p>';
+          return;
+        }
+        return Promise.all(files.map(function (f) {
+          return fetch(f.download_url).then(function (r) { return r.json(); }).then(function (post) {
+            return { name: f.name, title: post.title, date: post.date };
+          });
+        })).then(function (posts) {
+          posts.sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); });
+          listEl.innerHTML = posts.map(function (p) {
+            return '<a class="notice-card" href="notice.html?id=' + encodeURIComponent(p.name) + '">' +
+              '<span class="notice-card-date">' + formatDate(p.date) + '</span>' +
+              '<h3>' + p.title + '</h3>' +
+              '</a>';
+          }).join("");
+        });
+      })
+      .catch(function () {
+        listEl.innerHTML = '<p class="notice-status">공지사항을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>';
+      });
+  }
+})();
+</script>
+</body>
+</html>

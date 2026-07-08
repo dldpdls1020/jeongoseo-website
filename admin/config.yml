@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: dldpdls1020/jeongoseo-website
+  branch: main
+  base_url: https://jeongoseo-website.vercel.app
+  auth_endpoint: api/auth
+
+publish_mode: editorial_workflow
+
+media_folder: "content/notices/images"
+public_folder: "/content/notices/images"
+
+collections:
+  - name: "notices"
+    label: "공지사항"
+    label_singular: "공지글"
+    folder: "content/notices"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    identifier_field: title
+    summary: "{{title}} — {{date}}"
+    fields:
+      - { label: "제목", name: "title", widget: "string" }
+      - { label: "작성일", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", picker_utc: false }
+      - { label: "댓글 허용", name: "comments", widget: "boolean", default: true, hint: "끄면 이 글에는 댓글창이 보이지 않습니다" }
+      - { label: "내용", name: "body", widget: "markdown" }
