@@ -26,3 +26,21 @@ collections:
       - { label: "작성일", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", picker_utc: false }
       - { label: "댓글 허용", name: "comments", widget: "boolean", default: true, hint: "끄면 이 글에는 댓글창이 보이지 않습니다" }
       - { label: "내용", name: "body", widget: "markdown" }
+
+  - name: "voices"
+    label: "고객의 소리"
+    label_singular: "고객의 소리 글"
+    folder: "content/voices"
+    create: false
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    identifier_field: name
+    summary: "{{name}} — {{date}} {{fields.public}}"
+    fields:
+      - { label: "이름", name: "name", widget: "string" }
+      - { label: "이메일 (관리자 확인용, 공개 안 됨)", name: "email", widget: "string" }
+      - { label: "내용", name: "message", widget: "text" }
+      - { label: "작성일", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", picker_utc: false }
+      - { label: "사이트에 공개", name: "public", widget: "boolean", default: true, hint: "끄면 이 글은 방명록 목록에서 숨겨집니다 (삭제되지는 않아요)" }

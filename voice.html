@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고객의 소리 — 정오의 서</title>
+<meta name="description" content="정오의 서에 하고 싶은 이야기를 자유롭게 남겨주세요.">
+<link rel="icon" href="logo-badge-mango.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="logo-badge-mango.png" alt="정오의 서 로고">
+      <span class="brand-name">정오의 서<small>WHERE STORIES BEGIN</small></span>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="about.html">브랜드 소개</a></li>
+        <li><a href="category.html">카테고리</a></li>
+        <li><a href="class.html">글쓰기 클래스</a></li>
+        <li><a href="notice.html">공지사항</a></li>
+        <li><a href="voice.html" class="active">고객의 소리</a></li>
+        <li><a href="contact.html">문의</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="contact.html" class="btn btn-accent">문의하기</a>
+      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">VOICE</span>
+    <h1>고객의 소리</h1>
+    <p>정오의 서에 하고 싶은 이야기를 자유롭게 남겨주세요. 남겨주신 글은 누구나 볼 수 있어요.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container contact-wrap">
+    <div class="contact-info">
+      <h3>이용 안내</h3>
+      <p style="font-size:14.5px;">이름과 이메일은 필수 입력이에요. 이메일은 관리자가 답변드릴 때만 사용하고, 화면에는 공개되지 않아요.</p>
+      <ul>
+        <li><span>주의</span>남겨주신 글은 방명록처럼 모두에게 공개됩니다.</li>
+      </ul>
+    </div>
+
+    <form id="voice-form">
+      <div class="form-grid">
+        <div class="field">
+          <label for="v-name">이름</label>
+          <input id="v-name" name="name" type="text" placeholder="성함을 입력해주세요" required maxlength="60">
+        </div>
+        <div class="field">
+          <label for="v-email">이메일</label>
+          <input id="v-email" name="email" type="email" placeholder="답변받으실 이메일" required maxlength="120">
+        </div>
+        <div class="field full">
+          <label for="v-message">하고 싶은 이야기</label>
+          <textarea id="v-message" name="message" placeholder="정오의 서에 남기고 싶은 이야기를 적어주세요" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" id="v-website" autocomplete="off" tabindex="-1" style="position:absolute; left:-9999px; width:1px; height:1px;" aria-hidden="true">
+      </div>
+      <button type="submit" class="btn btn-accent" style="margin-top:8px;">남기기</button>
+      <p id="voice-status" class="form-note"></p>
+    </form>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">GUESTBOOK</span>
+      <h2>남겨주신 이야기</h2>
+    </div>
+    <div id="voice-list" class="notice-list">
+      <p class="notice-status">불러오는 중입니다…</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="logo-badge-dark.png" alt="정오의 서 로고">
+        <p>한 줄의 마음에서 시작해 한 권의 책으로 완성되는 곳, 정오의 서입니다.</p>
+      </div>
+      <div class="footer-col">
+        <h4>MENU</h4>
+        <ul>
+          <li><a href="about.html">브랜드 소개</a></li>
+          <li><a href="category.html">카테고리</a></li>
+          <li><a href="class.html">글쓰기 클래스</a></li>
+          <li><a href="notice.html">공지사항</a></li>
+          <li><a href="voice.html">고객의 소리</a></li>
+          <li><a href="contact.html">문의</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="mailto:hello@jeongoseo.com">hello@jeongoseo.com</a></li>
+          <li>평일 10:00 – 18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 정오의 서(JEONGO-UI SEO). All rights reserved.</span>
+      <span>Where Stories Begin</span>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+(function () {
+  var REPO = "dldpdls1020/jeongoseo-website";
+  var BRANCH = "main";
+  var FOLDER = "content/voices";
+  var listEl = document.getElementById("voice-list");
+  var form = document.getElementById("voice-form");
+  var statusEl = document.getElementById("voice-status");
+
+  function escapeHtml(str) {
+    var div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function loadList() {
+    listEl.innerHTML = '<p class="notice-status">불러오는 중입니다…</p>';
+    fetch("https://api.github.com/repos/" + REPO + "/contents/" + FOLDER + "?ref=" + BRANCH)
+      .then(function (r) {
+        if (!r.ok) throw new Error("list failed");
+        return r.json();
+      })
+      .then(function (items) {
+        var files = items.filter(function (it) { return it.name.endsWith(".json"); });
+        if (files.length === 0) {
+          listEl.innerHTML = '<p class="notice-status">아직 남겨주신 글이 없습니다.</p>';
+          return;
+        }
+        return Promise.all(files.map(function (f) {
+          return fetch(f.download_url).then(function (r) { return r.json(); });
+        })).then(function (entries) {
+          entries = entries.filter(function (e) { return e.public !== false; });
+          entries.sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); });
+          if (entries.length === 0) {
+            listEl.innerHTML = '<p class="notice-status">아직 공개된 글이 없습니다.</p>';
+            return;
+          }
+          listEl.innerHTML = entries.map(function (e) {
+            return '<div class="notice-card" style="cursor:default;">' +
+              '<span class="notice-card-date">' + escapeHtml((e.date || "").split(" ")[0]) + ' · ' + escapeHtml(e.name || "익명") + '</span>' +
+              '<h3 style="font-size:15.5px; font-weight:400; font-family:var(--sans); margin-top:8px;">' + escapeHtml(e.message || "") + '</h3>' +
+              '</div>';
+          }).join("");
+        });
+      })
+      .catch(function () {
+        listEl.innerHTML = '<p class="notice-status">글 목록을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>';
+      });
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    statusEl.textContent = "등록하는 중입니다…";
+    statusEl.style.color = "";
+
+    var payload = {
+      name: document.getElementById("v-name").value,
+      email: document.getElementById("v-email").value,
+      message: document.getElementById("v-message").value,
+      website: document.getElementById("v-website").value
+    };
+
+    fetch("/api/voice", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.data && res.data.error);
+        statusEl.textContent = "소중한 이야기 감사합니다. 잘 남겨졌어요!";
+        statusEl.style.color = "#B87F26";
+        form.reset();
+        setTimeout(loadList, 1200);
+      })
+      .catch(function () {
+        statusEl.textContent = "등록에 실패했습니다. 잠시 후 다시 시도해주세요.";
+        statusEl.style.color = "#c0392b";
+      });
+  });
+
+  loadList();
+})();
+</script>
+</body>
+</html>
