@@ -22,8 +22,7 @@
         <li><a href="about.html">브랜드 소개</a></li>
         <li><a href="category.html">카테고리</a></li>
         <li><a href="class.html">글쓰기 클래스</a></li>
-        <li><a href="notice.html">공지사항</a></li>
-        <li><a href="voice.html">고객의 소리</a></li>
+        <li><a href="news.html">소식</a></li>
         <li><a href="contact.html">문의</a></li>
       </ul>
     </nav>
@@ -125,6 +124,18 @@
   </div>
 </section>
 
+<section class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">TESTIMONIAL</span>
+      <h2>정오의 서와 함께한 분들의 이야기</h2>
+    </div>
+    <div id="testimonial-list" class="quote-grid">
+      <p class="notice-status">불러오는 중입니다…</p>
+    </div>
+  </div>
+</section>
+
 <section class="cta-banner">
   <div class="container">
     <h2>삶을 책으로, 마음을 문장으로.</h2>
@@ -146,8 +157,7 @@
           <li><a href="about.html">브랜드 소개</a></li>
           <li><a href="category.html">카테고리</a></li>
           <li><a href="class.html">글쓰기 클래스</a></li>
-          <li><a href="notice.html">공지사항</a></li>
-          <li><a href="voice.html">고객의 소리</a></li>
+          <li><a href="news.html">소식</a></li>
           <li><a href="contact.html">문의</a></li>
         </ul>
       </div>
@@ -167,5 +177,39 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+(function () {
+  var REPO = "dldpdls1020/jeongoseo-website";
+  var listEl = document.getElementById("testimonial-list");
+
+  function escapeHtml(str) {
+    var div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  fetch("https://api.github.com/repos/" + REPO + "/contents/content/testimonials?ref=main")
+    .then(function (r) { if (!r.ok) throw new Error("empty"); return r.json(); })
+    .then(function (items) {
+      var files = items.filter(function (it) { return it.name.endsWith(".json"); });
+      if (files.length === 0) throw new Error("empty");
+      return Promise.all(files.map(function (f) {
+        return fetch(f.download_url).then(function (r) { return r.json(); });
+      }));
+    })
+    .then(function (entries) {
+      entries = entries.filter(function (e) { return e.public !== false; });
+      if (entries.length === 0) throw new Error("empty");
+      listEl.innerHTML = entries.slice(0, 3).map(function (e) {
+        return '<div class="quote-card">' + escapeHtml(e.quote || "") +
+          '<div style="margin-top:14px; font-family:var(--sans); font-size:13px; color:var(--ink-soft);">' +
+          escapeHtml(e.name || "") + (e.role ? ' · ' + escapeHtml(e.role) : '') + '</div></div>';
+      }).join("");
+    })
+    .catch(function () {
+      listEl.innerHTML = '<p class="notice-status">정오의 서와 함께한 분들의 이야기를 차곡차곡 모으고 있어요. 곧 만나보실 수 있어요!</p>';
+    });
+})();
+</script>
 </body>
 </html>

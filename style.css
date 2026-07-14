@@ -553,6 +553,15 @@ section { padding: 96px 0; }
   position: absolute; left: 0; color: var(--mango);
 }
 
+/* Tabs */
+.tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+.tab-btn {
+  background: none; border: none; cursor: pointer; padding: 12px 6px; margin-bottom: -1px;
+  font-family: var(--serif); font-size: 17px; color: var(--ink-soft);
+  border-bottom: 2px solid transparent;
+}
+.tab-btn.active { color: var(--ink); border-color: var(--mango); }
+
 /* Notices */
 .notice-status { text-align: center; color: var(--ink-soft); padding: 40px 0; }
 .notice-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }

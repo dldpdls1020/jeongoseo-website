@@ -44,3 +44,19 @@ collections:
       - { label: "내용", name: "message", widget: "text" }
       - { label: "작성일", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", picker_utc: false }
       - { label: "사이트에 공개", name: "public", widget: "boolean", default: true, hint: "끄면 이 글은 방명록 목록에서 숨겨집니다 (삭제되지는 않아요)" }
+
+  - name: "testimonials"
+    label: "이용 후기"
+    label_singular: "후기"
+    folder: "content/testimonials"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    identifier_field: name
+    summary: "{{name}} — {{fields.role}}"
+    fields:
+      - { label: "이름 (또는 닉네임)", name: "name", widget: "string" }
+      - { label: "소개 (예: 에세이 수강생)", name: "role", widget: "string", required: false }
+      - { label: "후기 내용", name: "quote", widget: "text" }
+      - { label: "사이트에 공개", name: "public", widget: "boolean", default: true }
